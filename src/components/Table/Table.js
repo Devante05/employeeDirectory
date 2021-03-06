@@ -1,23 +1,17 @@
 import React from "react";
+import "./style.css";
 
 
 function Table (props) {
-    return <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">Image</th>
-        <th scope="col"><strong>Name:</strong></th>
-        <th scope="col"><strong>Occupation:</strong></th>
-        <th scope="col"><strong>Location:</strong></th>
-      </tr>
-    </thead>
+    return <table className="table">
+
     <tbody>
       <tr>
-        <th scope="row"></th>
-        <td><img alt={props.name} src={props.image} /></td>
-        <td> {props.name}</td>
-        <td> {props.occupation}</td>
-        <td> {props.location}</td>
+        
+        <td className=".col-3" ><img alt={props.name} src={props.image} /></td>
+        <td className=".col-3" > {props.name}</td>
+        <td className=".col-3" > {props.occupation}</td>
+        <td className=".col-3" > {props.location}</td>
       </tr>
     </tbody>
   </table>;
