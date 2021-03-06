@@ -6,23 +6,38 @@ import Tablehead from "./components/Tablehead/Tablehead";
 
 
 class App extends Component {
-  // Setting this.state.friends to the friends json array
   state = {
     employees
   };
 
 
     sortNames = name => {
-      const sortedEmployees = this.state.employees.sort(employees.name)
+      const sortedEmployees = this.state.employees.sort((a,b) => {
+        if (a.name < b.name) return -1;
+        else if (a.name > b.name) return 1;
+        return 0;
+      });
+    
 
-      console.log (sortedEmployees)
+      console.log ([sortedEmployees])
 }
+      sortNamesRev = name => {
+        const sortedEmployees = this.state.employees.sort((a,b) => {
+          if (a.name > b.name) return -1;
+          else if (a.name < b.name) return 1;
+          return 0;
+        });
 
-// sortNamesRev = name => {
-//   const sortedEmployees = this.state.employees.sort(employees.name).reverse();
+        // const revSortedEmployees = sortedEmployees.reverse()
 
-//   console.log (sortedEmployees)
-// }
+        // console.log ([revSortedEmployees])
+
+      console.log ([sortedEmployees])
+
+
+      }
+
+
 
   // filterNames = name => {
   //   const filteredName = this.state.employees.filter(employees.map(name =>{
@@ -45,7 +60,7 @@ class App extends Component {
   {this.state.employees.map(employee => (
   <Table
   
-  sortNames= {this.sortNames}
+  sortNamesRev= {this.sortNamesRev()}
   id={employee.id}
   key={employee.id}
   name={employee.name}

@@ -1,14 +1,25 @@
 import React from "react";
 import "./style.css";
+// import FormButton from "../FormButton";
 
 
 
 
-function Form() {
+
+function Form(props) {
     return (
         <form>
             <input type="email" className="form-control form-control-lg"  placeholder="Search from employee">
             </input>
+            {/* <FormButton
+            onClick={props.handleBtnClick}
+            data-value="pass"
+            />
+            <FormButton
+            onClick={props.handleBtnClick}
+            data-value="pass"
+            /> */}
+
 
 
         </form>
