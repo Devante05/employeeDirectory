@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./style.css";
 // import FormButton from "../FormButton";
 
@@ -6,24 +6,14 @@ import "./style.css";
 
 
 
-class Form extends Component {
-    return (
-        <form>
-            <input type="email" className="form-control form-control-lg"  placeholder="Search from employee">
-            </input>
-            {/* <FormButton
-            onClick={props.handleBtnClick}
-            data-value="pass"
-            />
-            <FormButton
-            onClick={props.handleBtnClick}
-            data-value="pass"
-            /> */}
+function Form(props) {
+  return (
+    <form>
+      <input onChange={props.handleInputChange} value={props.value} type="email" className="form-control form-control-lg" placeholder="Search for employee by name">
+      </input>
 
+    </form>
+  );
+}
 
-
-        </form>
-    );
-  }
-
-  export default Form;
+export default Form;
