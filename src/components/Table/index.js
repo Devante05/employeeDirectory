@@ -7,7 +7,9 @@ import "./style.css";
 function Table(props) {
   return <table className= "table">
     <THead sortBy={props.sortBy} />
-    <TBody employees={props.employees} />
+    <TBody 
+    employees={props.employees}
+    />
   </table>;
 }
 

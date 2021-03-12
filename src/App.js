@@ -6,9 +6,11 @@ import API from "./utils/API"
 
 class App extends Component {
   state = {
-    sortDirecttion: "asc",
+    sortDirecttion: "",
     employees: [],
     filteredEmployees: [],
+    // results: [],
+    search: ""
   };
 
   componentDidMount() {
@@ -26,7 +28,6 @@ class App extends Component {
         
 
         this.setState({ employees: mapped, filteredEmployees: mapped })
-        console.log(res.data)
       })
       .catch(err => console.log(err));
 
@@ -37,16 +38,21 @@ class App extends Component {
   }
 
   handleInputChange = event => {
-    // Getting the value and name of the input which triggered the change
-    let value = event.target.value;
-    const name = event.target.name;
+    let searchResult = event.target.value.toLowerCase();
+    
 
+    let newEmps = this.state.employees.filter(mapped => `${mapped.first.toLowerCase()} ${mapped.last.toLowerCase()}`.includes(searchResult))
 
-    // Updating the input's state
     this.setState({
-      [name]: value
-    });
+      search: searchResult,
+      employees: newEmps
+    })
+  console.log(newEmps)
   };
+
+
+
+  
 
 
   sortBy = e => {
@@ -83,9 +89,13 @@ class App extends Component {
         />
 
         {/* Table({employees:this.state.employees}) */}
-        <Table sortBy={this.sortBy} employees={this.state.filteredEmployees} />
+        <Table 
+        handleInputChange={this.handleInputChange} search ={this.state.employees} 
+
+        sortBy={this.sortBy} employees={this.state.filteredEmployees} />
 
       </Wrapper>
+      
     );
   }
 }
