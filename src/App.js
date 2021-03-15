@@ -22,10 +22,8 @@ class App extends Component {
           last: r.name.last,
           email: r.email,
           location: r.location.country
-          
-
         }))
-        
+
 
         this.setState({ employees: mapped, filteredEmployees: mapped })
       })
@@ -39,21 +37,23 @@ class App extends Component {
 
   handleInputChange = event => {
     let searchResult = event.target.value.toLowerCase();
-    
+    //  let newEmps = this.state.employees.filter(mapped => `${mapped.first.toLowerCase()} ${mapped.last.toLowerCase()}`.includes(searchResult))
+    let newEmps = this.state.employees.filter(({ first, last }) => {
 
-    let newEmps = this.state.employees.filter(mapped => `${mapped.first.toLowerCase()} ${mapped.last.toLowerCase()}`.includes(searchResult))
+      let firstSlice = first.slice(0, searchResult.length).toLowerCase();
+      if (firstSlice === searchResult) return true;
+
+      let lastSlice = last.slice(0, searchResult.length).toLowerCase();
+      if (lastSlice === searchResult) return true;
+
+      return false;
+    })
 
     this.setState({
       search: searchResult,
-      employees: newEmps
+      filteredEmployees: newEmps
     })
-  console.log(newEmps)
   };
-
-
-
-  
-
 
   sortBy = e => {
     const col = e.target.getAttribute("data-name")
@@ -63,39 +63,30 @@ class App extends Component {
     if (dir === "desc") sorted = this.state.employees.sort((a, b) => a[col] > b[col] ? 1 : -1)
     else sorted = this.state.employees.sort((a, b) => a[col] < b[col] ? 1 : -1)
 
-    
-
     this.setState({
       sortDirecttion: dir,
       employees: sorted
     })
   }
 
-  // filterNames = name => {
-  //   const filtedEmployees = this.state.employees.filter(employees => employees)
-
-  // }
-
   render() {
     return (
 
       <Wrapper>
-
         <Form
           value={this.state.search}
           handleInputChange={this.handleInputChange}
           handleFormSubmit={this.handleFormSubmit}
-
         />
 
         {/* Table({employees:this.state.employees}) */}
-        <Table 
-        handleInputChange={this.handleInputChange} search ={this.state.employees} 
-
-        sortBy={this.sortBy} employees={this.state.filteredEmployees} />
-
+        <Table
+          handleInputChange={this.handleInputChange}
+          search={this.state.employees}
+          sortBy={this.sortBy}
+          employees={this.state.filteredEmployees} />
       </Wrapper>
-      
+
     );
   }
 }

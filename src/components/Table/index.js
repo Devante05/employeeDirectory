@@ -8,8 +8,7 @@ function Table(props) {
   return <table className= "table">
     <THead sortBy={props.sortBy} />
     <TBody 
-    employees={props.employees}
-    />
+    employees={props.employees || props.newEmp} />
   </table>;
 }
 
